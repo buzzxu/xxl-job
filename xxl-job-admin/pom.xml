@@ -143,4 +143,21 @@
 
 	</dependencies>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.4.4</version>
+				<configuration>
+
+					<repository>buzzxu/${project.artifactId}</repository>
+					<tag>${project.version}</tag>
+					<buildArgs>
+						<WAR_FILE>target/${project.build.finalName}.war</WAR_FILE>
+					</buildArgs>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
