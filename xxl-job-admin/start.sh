@@ -11,6 +11,9 @@ do
  --mysql-port)
  sed -i "3s/3306/$2/g" $CONFIG_FILE
  shift 2;;
+ --mysql-database)
+ sed -i "3s/xxl-job/$2/g" $CONFIG_FILE
+ shift 2;;
  --mysql-user)
  sed -i "4s/root/$2/g" $CONFIG_FILE
  shift 2;;
