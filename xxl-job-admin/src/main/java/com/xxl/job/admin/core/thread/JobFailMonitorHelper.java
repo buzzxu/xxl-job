@@ -59,7 +59,7 @@ public class JobFailMonitorHelper {
 								if (IJobHandler.SUCCESS.getCode() == log.getTriggerCode() && log.getHandleCode() == 0) {
 									// job running
 									JobFailMonitorHelper.monitor(jobLogId);
-									logger.info(">>>>>>>>>>> job monitor, job running, JobLogId:{}", jobLogId);
+									logger.debug(">>>>>>>>>>> job monitor, job running, JobLogId:{}", jobLogId);
 								} else if (IJobHandler.SUCCESS.getCode() == log.getHandleCode()) {
 									// job success, pass
 									logger.info(">>>>>>>>>>> job monitor, job success, JobLogId:{}", jobLogId);
@@ -73,10 +73,7 @@ public class JobFailMonitorHelper {
 									XxlJobInfo info = XxlJobDynamicScheduler.xxlJobInfoDao.loadById(log.getJobId());
 
 									if (log.getExecutorFailRetryCount() > 0) {
-
-										// TODO，分片任务失败重试优化，仅重试失败分片
-
-										JobTriggerPoolHelper.trigger(log.getJobId(), (log.getExecutorFailRetryCount()-1), TriggerTypeEnum.RETRY);
+										JobTriggerPoolHelper.trigger(log.getJobId(), TriggerTypeEnum.RETRY, (log.getExecutorFailRetryCount()-1), log.getExecutorShardingParam(), null);
 										String retryMsg = "<br><br><span style=\"color:#F39C12;\" > >>>>>>>>>>>"+ I18nUtil.getString("jobconf_trigger_type_retry") +"<<<<<<<<<<< </span><br>";
 										log.setTriggerMsg(log.getTriggerMsg() + retryMsg);
 										XxlJobDynamicScheduler.xxlJobLogDao.updateTriggerInfo(log);
@@ -151,7 +148,7 @@ public class JobFailMonitorHelper {
 			"         <td width=\"10%\" >"+ I18nUtil.getString("jobconf_monitor_alarm_title") +"</td>\n" +
 			"         <td width=\"40%\" >"+ I18nUtil.getString("jobconf_monitor_alarm_content") +"</td>\n" +
 			"      </tr>\n" +
-			"   <thead/>\n" +
+			"   </thead>\n" +
 			"   <tbody>\n" +
 			"      <tr>\n" +
 			"         <td>{0}</td>\n" +
@@ -160,7 +157,7 @@ public class JobFailMonitorHelper {
 			"         <td>"+ I18nUtil.getString("jobconf_monitor_alarm_type") +"</td>\n" +
 			"         <td>{3}</td>\n" +
 			"      </tr>\n" +
-			"   <tbody>\n" +
+			"   </tbody>\n" +
 			"</table>";
 
 	/**
