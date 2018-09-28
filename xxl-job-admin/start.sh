@@ -26,23 +26,26 @@ do
  --mail-port)
  sed -i "9s/25/$2/g" $CONFIG_FILE
  shift 2;;
+ --mail-ssl)
+ sed -i "10s/false/$2/g" $CONFIG_FILE
+ shift 2;;
  --mail-username)
- sed -i "10s/ovono802302@163.com/$2/g" $CONFIG_FILE
+ sed -i "11s/ovono802302@163.com/$2/g" $CONFIG_FILE
  shift 2;;
  --mail-password)
- sed -i "11s/asdfzxcv/$2/g" $CONFG_FILE
+ sed -i "12s/asdfzxcv/$2/g" $CONFG_FILE
  shift 2;;
  --mail-sendnick)
- sed -i "12s/《任务调度平台XXL-JOB》/$2/g" $CONFG_FILE
+ sed -i "13s/《任务调度平台XXL-JOB》/$2/g" $CONFG_FILE
  shift 2;;
  --login-username)
- sed -i "15s/admin/$2/g" $CONFIG_FILE
+ sed -i "16s/admin/$2/g" $CONFIG_FILE
  shift 2;;
  --login-password)
- sed -i "16s/123456/$2/g" $CONFIG_FILE
+ sed -i "17s/123456/$2/g" $CONFIG_FILE
  shift 2;;
  --access-token)
- sed -i "19s/xxl.job.accessToken=/xxl.job.accessToken=$2/g" $CONFIG_FILE
+ sed -i "20s/xxl.job.accessToken=/xxl.job.accessToken=$2/g" $CONFIG_FILE
  shift 2;;
  *) echo " unknow prop $1";shift;;
  esac
