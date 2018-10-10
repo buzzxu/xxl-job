@@ -151,7 +151,7 @@
 				<artifactId>dockerfile-maven-plugin</artifactId>
 				<version>1.4.4</version>
 				<configuration>
-
+					<dockerInfoDirectory>docker</dockerInfoDirectory>
 					<repository>buzzxu/${project.artifactId}</repository>
 					<tag>${project.version}</tag>
 					<buildArgs>
